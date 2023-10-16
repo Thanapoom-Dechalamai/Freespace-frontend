@@ -55,13 +55,11 @@ const RepostModal = (props) =>
                                     {username}
                                 </p>
                             </div>
-                            <InputGroup id='reply-input' >
-                                <Form.Control
-                                    placeholder={`Start a thread...`}
-                                    onChange={(e) => setPostText(e.target.value)}
-                                    value={postText}
-                                />
-                            </InputGroup>
+                            <textarea
+                                placeholder={`Start a thread...`}
+                                value={postText}
+                                onChange={(e) => setPostText(e.target.value)}
+                            />
                         </div>
                         <div className='border rounded'>
                             <Post className='mt-2' post={post} interaction={false} />

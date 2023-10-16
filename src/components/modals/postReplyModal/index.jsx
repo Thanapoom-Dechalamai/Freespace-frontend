@@ -92,13 +92,11 @@ const PostReplyModal = (props) =>
                                     {clientUsername}
                                 </p>
                             </div>
-                            <InputGroup id='reply-input' >
-                                <textarea
-                                    placeholder={`Reply to ${profile?.username}`}
-                                    value={replyText}
-                                    onChange={(e) => setReplyText(e.target.value)}
-                                />
-                            </InputGroup>
+                            <textarea
+                                placeholder={`Reply to ${profile?.username}`}
+                                value={replyText}
+                                onChange={(e) => setReplyText(e.target.value)}
+                            />
                         </div>
                     </div>
                 </div>

@@ -69,10 +69,8 @@ function NavbarComponent()
                                             </Link>
                                         </Nav.Link>
                                     </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link>
-                                            <CreatePostButton className='nav-icon' />
-                                        </Nav.Link>
+                                    <Nav.Item className='p-2 pointer'>
+                                        <CreatePostButton className='nav-icon' />
                                     </Nav.Item>
                                     <Nav.Item>
                                         <Nav.Link>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, InputGroup, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useGetProfile } from '../../../hooks/users';
 import ProfileImage from '../../profileImage';
 import { useSelector } from 'react-redux';
@@ -22,7 +22,11 @@ const CreatePostModal = (props) =>
     return (
         <Modal
             show={show}
-            onHide={onHide}
+            onHide={() =>
+            {
+                onHide();
+                setPostText('');
+            }}
             className=''
             aria-labelledby="contained-modal-title-vcenter"
             centered
@@ -54,13 +58,11 @@ const CreatePostModal = (props) =>
                                     {username}
                                 </p>
                             </div>
-                            <InputGroup id='reply-input'>
-                                <textarea
-                                    placeholder={`Start a thread...`}
-                                    value={postText}
-                                    onChange={(e) => setPostText(e.target.value)}
-                                />
-                            </InputGroup>
+                            <textarea
+                                placeholder={`Start a thread...`}
+                                value={postText}
+                                onChange={(e) => setPostText(e.target.value)}
+                            />
                         </div>
                     </div>
                 </div>
