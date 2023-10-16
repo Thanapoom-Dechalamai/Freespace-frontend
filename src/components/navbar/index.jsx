@@ -4,10 +4,9 @@ import { logout } from '../../redux/authSlice';
 import { Navbar, Nav, Container, Row, Col, Dropdown } from 'react-bootstrap';
 import { Outlet } from "react-router";
 import { GoHomeFill, GoSearch } from 'react-icons/go';
-import { HiOutlinePencilAlt } from 'react-icons/hi';
 import { BsPerson } from 'react-icons/bs';
 import { FaCode } from 'react-icons/fa6';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import CreatePostButton from '../button/createPostButton';
 
 function NavbarComponent()
@@ -57,13 +56,17 @@ function NavbarComponent()
                             <Nav className="ml-auto w-100 justify-content-center">
                                 <div className="d-flex justify-content-between nav-icon-container">
                                     <Nav.Item>
-                                        <Nav.Link href="/">
-                                            <GoHomeFill className='nav-icon' />
+                                        <Nav.Link>
+                                            <Link to="/">
+                                                <GoHomeFill className='nav-icon' />
+                                            </Link>
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item>
-                                        <Nav.Link href="search">
-                                            <GoSearch className='nav-icon' />
+                                        <Nav.Link>
+                                            <Link to="/search">
+                                                <GoSearch className='nav-icon' />
+                                            </Link>
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item>
@@ -72,8 +75,10 @@ function NavbarComponent()
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item>
-                                        <Nav.Link href="profile">
-                                            <BsPerson className='nav-icon' />
+                                        <Nav.Link>
+                                            <Link to="/profile">
+                                                <BsPerson className='nav-icon' />
+                                            </Link>
                                         </Nav.Link>
                                     </Nav.Item>
                                 </div>
