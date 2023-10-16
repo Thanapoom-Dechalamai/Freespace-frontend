@@ -27,6 +27,7 @@ function ProfilePage()
     const [followListModalShow, setFollowListModalShow] = useState(false);
     const { data } = useGetPostsByUserIdQuery(profile?.userId, { skip: !profile?.userId });
     const posts = data?.result;
+    let sortedPosts = Array.isArray(posts) ? [...posts].reverse() : [];
 
     useEffect(() =>
     {
@@ -113,7 +114,7 @@ function ProfilePage()
                     </Col>
                 </Row>
                 <div className="mt-3">
-                    <PostContainer posts={posts} />
+                    <PostContainer posts={sortedPosts} />
                 </div>
                 {/* Edit profile modal */}
                 <EditProfileModal
