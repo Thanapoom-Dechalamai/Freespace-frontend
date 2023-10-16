@@ -6,9 +6,10 @@ function HomePage()
 {
     const { data } = useGetAllPostsQuery();
     const posts = data?.result;
+    let sortedPosts = Array.isArray(posts) ? [...posts].reverse() : [];
     return (
         <main className="page container">
-            <PostContainer posts={posts} />
+            <PostContainer posts={sortedPosts} />
         </main>
     );
 }
