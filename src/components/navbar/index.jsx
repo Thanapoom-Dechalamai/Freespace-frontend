@@ -31,7 +31,7 @@ function NavbarComponent()
                     </Col>
                     <Col xs={4} className='d-flex justify-content-end'>
                         <Dropdown className='d-md-none d-flex justify-content-center mt-1'>
-                            <Dropdown.Toggle size='sm' variant="dark" id="dropdown-basic">
+                            <Dropdown.Toggle size='sm' variant="transparent" id="dropdown-basic">
 
                             </Dropdown.Toggle>
 
@@ -40,7 +40,8 @@ function NavbarComponent()
                                     Sign out
                                 </Dropdown.Item>
                             </Dropdown.Menu>
-                        </Dropdown></Col>
+                        </Dropdown>
+                    </Col>
                 </Row>
 
             </Navbar>
