@@ -4,7 +4,7 @@ import Post from '../post';
 const PostContainer = ({ posts }) =>
 {
 
-    if (!posts)
+    if (!posts || posts?.length <= 0)
     {
         return (
             <div className='text-center'>
@@ -12,7 +12,6 @@ const PostContainer = ({ posts }) =>
             </div>
         );
     }
-
     return (
         <div>
             {
