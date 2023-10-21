@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProfileImage from '../profileImage';
 import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from 'react-icons/ai';
-import { BsThreeDots } from 'react-icons/bs';
 import { useIsClientUser } from '../../hooks/users';
 import { useDeletePostMutation, useGetPostByIdQuery, useLikePostMutation, useUnlikePostMutation } from '../../redux/apiSlice';
 import { useSelector } from 'react-redux';
@@ -12,6 +11,7 @@ import { useNavigate } from 'react-router';
 import PostRepliesModal from '../modals/postRepliesModal';
 import RepostButton from '../button/repostButton';
 import { Dropdown } from 'react-bootstrap';
+import { createMarkup } from '../../hooks/tools';
 
 const Post = ({ post, interaction = true, className }) =>
 {
@@ -54,9 +54,12 @@ const Post = ({ post, interaction = true, className }) =>
     };
     const createdAt = new Date(post?.createdAt);
     const timeAgo = formatTimeAgo(createdAt);
+
+    // Helper function to create clickable links
+
     return (
         <>
-            <div className={`d-flex mb-3 ${className}`}>
+            <div className={`d-flex mb-3 ${className}`} style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
                 <ProfileImage
                     className="mt-1 pointer"
                     style={{ width: "2.5rem", height: "2.5rem" }}
@@ -64,7 +67,7 @@ const Post = ({ post, interaction = true, className }) =>
                     onClick={gotoProfile}
                 />
                 <div className="d-flex justify-content-between flex-grow-1 ms-2 d-inline-block mb-3">
-                    <div className="flex-grow-1">
+                    <div className="flex-grow-1" style={{ wordBreak: 'break-word' }}>
                         <div className='d-flex justify-content-between'>
                             <p
                                 className="m-0 mb-1 fw-bold underline pointer"
@@ -101,29 +104,33 @@ const Post = ({ post, interaction = true, className }) =>
                                 )}
                             </div>
                         </div>
-                        <p className="m-0 mb-3" style={{ whiteSpace: 'pre-wrap' }}>
-                            {post?.content}
-                        </p>
-                        {repost && !isError &&
+                        <div
+                            className="m-0 mb-3"
+                            style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
+                            dangerouslySetInnerHTML={createMarkup(post?.content)}
+                        ></div>
+                        {repost && !isError && (
                             <div className='border rounded mb-3'>
                                 <Post className='mt-2' post={repost} interaction={false} />
                             </div>
-                        }
-                        {isError &&
-                            <div className='d-flex justify-content-center align-items-center border rounded mb-3 opacity-75'
+                        )}
+                        {isError && (
+                            <div
+                                className='d-flex justify-content-center align-items-center border rounded mb-3 opacity-75'
                                 style={{ height: '5rem' }}
                             >
                                 Content not available
                             </div>
-                        }
+                        )}
 
                         {interaction && (
                             <div className='d-flex gap-3'>
                                 <div className='pointer' onClick={handleLike}>
-                                    {isLiked ?
-                                        <AiFillHeart style={{ width: "1.5rem", height: "1.5rem", color: "#FA383E" }} /> :
+                                    {isLiked ? (
+                                        <AiFillHeart style={{ width: "1.5rem", height: "1.5rem", color: "#FA383E" }} />
+                                    ) : (
                                         <AiOutlineHeart style={{ width: "1.5rem", height: "1.5rem" }} />
-                                    }
+                                    )}
                                 </div>
                                 <div className='pointer' onClick={() => setIsReplyModalOpen(true)}>
                                     <AiOutlineComment style={{ width: "1.5rem", height: "1.5rem", transform: "scaleX(-1)" }} />
@@ -134,22 +141,22 @@ const Post = ({ post, interaction = true, className }) =>
                             </div>
                         )}
                         <div className='opacity-50 mt-2'>
-                            {
-                                post?.comments.length > 0 &&
+                            {post?.comments.length > 0 && (
                                 <span className='pointer underline' onClick={() =>
                                 {
                                     setIsRepliesModalOpen(true);
                                 }}>
-                                    {post?.comments.length} {post?.comments.length > 1 ? 'replies' : 'reply'}</span>
-                            }
-                            {
-                                post?.comments.length > 0 && post?.likes.length > 0 &&
+                                    {post?.comments.length} {post?.comments.length > 1 ? 'replies' : 'reply'}
+                                </span>
+                            )}
+                            {post?.comments.length > 0 && post?.likes.length > 0 && (
                                 <span> · </span>
-                            }
-                            {
-                                post?.likes.length > 0 &&
-                                <span className='pointer underline' onClick={() => setIsLikesModalOpen(true)}>{post?.likes.length} {post?.likes.length > 1 ? 'likes' : 'like'}</span>
-                            }
+                            )}
+                            {post?.likes.length > 0 && (
+                                <span className='pointer underline' onClick={() => setIsLikesModalOpen(true)}>
+                                    {post?.likes.length} {post?.likes.length > 1 ? 'likes' : 'like'}
+                                </span>
+                            )}
                         </div>
                     </div>
                 </div>

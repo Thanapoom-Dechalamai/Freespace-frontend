@@ -59,3 +59,12 @@ export const formatTimeAgo = (date) =>
         return `${week}w`;
     }
 };
+
+// Helper function to create clickable links
+export const createMarkup = (content) =>
+{
+    const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+    return {
+        __html: content.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'),
+    };
+};
